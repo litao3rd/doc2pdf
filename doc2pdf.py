@@ -34,10 +34,11 @@ def GenerateSupport():
   gencache.EnsureModule('{00020905-0000-0000-C000-000000000046}', 0, 8, 4)
 
 def walk_directory(directory):
-    count = 0
+    total = 0
     for root, dirs, files in os.walk(directory):
+        count = 0
         # make directory
-        pdf_file_dir = os.path.join(root, "pdf")
+        pdf_file_dir = os.path.join(root, "doc2pdf")
         os.mkdir(pdf_file_dir)
         for name in files:
             if name.split('.')[-1] == "doc":
@@ -45,34 +46,31 @@ def walk_directory(directory):
                 doc_file = os.path.join(root, name)
                 if not doc2pdf(doc_file, pdf_file):
                     count = count + 1
-    return count
+        if count == 0:
+            os.rmdir(pdf_file_dir)
+        else:
+            total = total + count
+    return total
 
-"""
-def main():
-  if (len(sys.argv) == 2):
-    input = sys.argv[1]
-    output = os.path.splitext(input)[0]+'.pdf'
-  elif (len(sys.argv) == 3):
-    input = sys.argv[1]
-    output = sys.argv[2]
-  else:
-    input = u'BA06007013.docx'#word文档的名称
-    output = u'BA06007013.pdf'#pdf文档的名称
-  if (not os.path.isabs(input)):
-    input = os.path.abspath(input)
-  if (not os.path.isabs(output)):
-    output = os.path.abspath(output)
-  try:
-    GenerateSupport()
-    rc = doc2pdf(input, output)
-    return rc
-  except:
-    return -1
-"""
+def convert_one_file(filepath, target=None):
+    if not os.path.isabs(filepath):
+        path = os.path.abspath(filepath)
+    if target:
+        if not os.path.isabs(target):
+            target = os.path.abspath(target)
+        return doc2pdf(path, target)
+    pdf_file = os.path.splitext(path)[0] + ".pdf"
+    return doc2pdf(path, pdf_file)
+
 def main():
     GenerateSupport()
-    if len(sys.argv) == 2 and os.path.isdir(sys.argv[1]):
-        return walk_directory(sys.argv[1])
+    if len(sys.argv == 2):
+        if os.path.isdir(sys.argv[1]):
+            return walk_directory(sys.argv[1])
+        elif os.path.isfile(sys.argv[1]):
+            return convert_one_file(sys.argv[1])
+    elif len(sys.argv == 3 and os.path.isfile(sys.argv[1])):
+        return convert_one_file(sys.argv[1], sys.argv[2])
 
 if __name__=='__main__':
 	rc = main()
