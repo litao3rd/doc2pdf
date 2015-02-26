@@ -10,6 +10,9 @@ import sys, os
 from win32com.client import Dispatch, constants, gencache
 
 app = Dispatch("Word.Application")
+# set UI un-visible, no warning
+app.Visible = 0
+app.DisplayAlerts = 0
 
 def doc2pdf(input, output):
     #w = Dispatch("Word.Application")
@@ -68,7 +71,7 @@ def main():
 """
 def main():
     GenerateSupport()
-    if len(sys.argv) == 2 and os.path.isdir(argv[1]):
+    if len(sys.argv) == 2 and os.path.isdir(sys.argv[1]):
         return walk_directory(sys.argv[1])
 
 if __name__=='__main__':
