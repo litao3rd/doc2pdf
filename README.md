@@ -9,13 +9,14 @@ for Windows Extensions**. You can get it
 This program accept a directory path, and convert all the .doc files in that path
 to .pdf file format. It works recursively. So it will covert all doc files in
 its sub-directorys.
+``` bash
+$ doc2pdf.py [source-directory-path]
 
-> doc2pdf.py <source-directory-path>
+$ doc2pdf.py [source-doc-file-path]
 
-> doc2pdf.py <source-doc-file-path>
+$ doc2pdf.py [source-doc-file-path] [target-pdf-file-path]
+```
 
-> doc2pdf.py <source-doc-file-path> <target-pdf-file-path>
-
-I complete there code by learning some guys' works. It contains some codes from
+I complete these code by learning some guys' works. The program contains some codes from
 [**HERE**](http://blog.csdn.net/rumswell/article/details/7434302). Thanks for
 your blog article and source code.
