@@ -39,7 +39,8 @@ def walk_directory(directory):
         count = 0
         # make directory
         pdf_file_dir = os.path.join(root, "doc2pdf")
-        os.mkdir(pdf_file_dir)
+        if not "doc2pdf" in dirs:
+            os.mkdir(pdf_file_dir)
         for name in files:
             if name.split('.')[-1] == "doc":
                 pdf_file = os.path.join(pdf_file_dir, name.split('.')[0]+".pdf")
@@ -64,12 +65,12 @@ def convert_one_file(filepath, target=None):
 
 def main():
     GenerateSupport()
-    if len(sys.argv == 2):
+    if len(sys.argv) == 2:
         if os.path.isdir(sys.argv[1]):
             return walk_directory(sys.argv[1])
         elif os.path.isfile(sys.argv[1]):
             return convert_one_file(sys.argv[1])
-    elif len(sys.argv == 3 and os.path.isfile(sys.argv[1])):
+    elif len(sys.argv) == 3 and os.path.isfile(sys.argv[1]):
         return convert_one_file(sys.argv[1], sys.argv[2])
 
 if __name__=='__main__':
