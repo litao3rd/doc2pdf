@@ -3,7 +3,7 @@
 This is a very dirty code about convert Windows doc files to pdf files. It's my first time to write python code. Fortunately, it works fine. 
 
 It's implemented by Windows Office COM interfaces, and call COM interfaces by **Python
-for Windows Extensions**. You can get it
+for Windows Extensions**. You can get it from 
     [**HERE**](http://sourceforge.net/projects/pywin32/files%2Fpywin32).
 
 This program accepts a directory path, and convert all the .doc files in that path
