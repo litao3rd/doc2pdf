@@ -14,7 +14,7 @@ app = Dispatch("Word.Application")
 app.Visible = False
 app.DisplayAlerts = False
 
-# convert .dco file to .pdf file
+# convert .doc file to .pdf file
 def doc2pdf(input, output):
     #w = Dispatch("Word.Application")
     global app
@@ -82,6 +82,4 @@ def main():
 if __name__=='__main__':
     rc = main()
     app.Quit(constants.wdDoNotSaveChanges)
-    if not rc:
-        sys.exit(rc)
-    sys.exit(0)
+    sys.exit(rc)
